@@ -1,0 +1,20 @@
+{
+  "_comment": "AR Kart vision bridge config. stream_url is the kart's stock esp32-cam MJPEG endpoint (conductor contract: http://<kart-ip>/stream). Edit the IPs to whatever the Opal router hands out.",
+  "stdb": {
+    "base_url": "http://localhost:3000",
+    "database": "arkart"
+  },
+  "tag_whitelist": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+  "karts": [
+    {
+      "kart_id": 1,
+      "name": "kart-1",
+      "stream_url": "http://192.168.8.101/stream"
+    },
+    {
+      "kart_id": 2,
+      "name": "kart-2",
+      "stream_url": "http://192.168.8.102/stream"
+    }
+  ]
+}

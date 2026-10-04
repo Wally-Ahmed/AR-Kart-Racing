@@ -1,0 +1,13 @@
+# Plan RX — radio-socket injection into the stock receiver-decoder board (rx_inject.c).
+# Overlay fragment: apply ON TOP OF sdkconfig.defaults, never instead of it.
+#
+#   idf.py -B build.planrx \
+#          -D SDKCONFIG=sdkconfig.planrx.out \
+#          -D SDKCONFIG_DEFAULTS="sdkconfig.defaults;sdkconfig.planrx" \
+#          build
+#
+# Two wires to the car: ARKART_PIN_RX_DATA (GPIO47) -> SA1607RX 330 pin 14, the demodulated
+# data input (equivalently the radio socket's DATA pad — same net); ESP32 GND -> the board's
+# V- hole. The car board keeps its own batteries; its V+ pad stays unconnected.
+CONFIG_ARKART_DRIVE_BACKEND_RXINJECT=y
+CONFIG_ARKART_RXINJECT_CONSOLE=y

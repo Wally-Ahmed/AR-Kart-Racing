@@ -1,0 +1,8 @@
+{
+  "_comment": "INTEGRATION-ONLY address book: both karts point at this laptop so `npm run listen` (the fake kart) receives the UDP the bridge would send to real ESP32s. The venue file is arkart/car-bridge/karts.json.",
+  "port": 7777,
+  "karts": [
+    { "kart_id": 1, "name": "kart-1", "ip": "127.0.0.1" },
+    { "kart_id": 2, "name": "kart-2", "ip": "127.0.0.1" }
+  ]
+}

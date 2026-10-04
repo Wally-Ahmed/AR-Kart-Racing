@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AR Kart</title>
+<style>
+  :root { --bg:#0e1116; --panel:#161b22; --line:#2d333b; --text:#e6edf3; --dim:#9aa4af; --accent:#58a6ff; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text);
+         font:16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  header { padding:40px 16px 8px; text-align:center; }
+  h1 { margin:0 0 6px; font-size:2rem; }
+  header p { margin:0 auto; max-width:40rem; color:var(--dim); }
+  nav { display:flex; justify-content:center; gap:8px; flex-wrap:wrap;
+        margin:28px auto 0; padding:0 16px; max-width:44rem; }
+  nav a { flex:1 1 200px; max-width:260px; text-decoration:none; color:var(--text);
+          background:var(--panel); border:1px solid var(--line); border-radius:10px;
+          padding:16px 12px; text-align:center; transition:border-color .15s; }
+  nav a:hover { border-color:var(--accent); }
+  nav a .t { display:block; font-weight:600; }
+  nav a .d { display:block; margin-top:4px; font-size:.82rem; color:var(--dim); }
+  footer { margin:48px 0 32px; text-align:center; color:var(--dim); font-size:.8rem; padding:0 16px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🏎 AR Kart</h1>
+  <p>Real-life Mario Kart. The toy RC cars stay <b>100 % stock</b> — an ESP32-S3-CAM mounted in each
+     shell electrically <b>presses the buttons on the car's own remote</b>, which rides inside the
+     car an inch from its receiver. Camera up, remote pressed, nothing cut.</p>
+</header>
+<nav>
+  <a href="docs/design/arkart-build-sheet.html">
+    <span class="t">📋 Build Sheet</span>
+    <span class="d">The full hardware walkthrough — Plan A, the five probes, every joint</span>
+  </a>
+  <a href="docs/design/arkart-build-sheet-tour.html">
+    <span class="t">🎬 Narrated Tour</span>
+    <span class="d">Guided scene-by-scene walkthrough of the build sheet</span>
+  </a>
+</nav>
+<footer>AR Kart · walkthrough updated 2026-10-03 (Plan A — the camera board presses the stock remote's buttons)</footer>
+</body>
+</html>

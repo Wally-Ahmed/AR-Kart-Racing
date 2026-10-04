@@ -1,0 +1,8 @@
+# AR Kart vision bridge.
+# The checked-in .venv is Python 3.12 and is the proven one. Python 3.14 also works
+# as of 2026-10-04 — opencv-contrib-python 4.14 now ships a cp314 wheel (it did not
+# when this was written at HopHacks), and the full suite passes on 3.14.3.
+opencv-contrib-python>=4.8,<5   # cv2.aruco.ArucoDetector + generateImageMarker (4.7+)
+numpy>=1.26
+requests>=2.31
+pytest>=8.0

@@ -1,0 +1,11 @@
+{
+  "name": "arkart-integration",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "AR Kart integration harness — owns the generated SpacetimeDB client bindings and the end-to-end demo script.",
+  "engines": { "node": ">=22.18" },
+  "dependencies": {
+    "spacetimedb": "2.4.1"
+  }
+}

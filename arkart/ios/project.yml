@@ -1,0 +1,93 @@
+# ARKartPilot — XcodeGen project definition.
+# Regenerate the .xcodeproj at any time with:  cd arkart/ios && xcodegen generate
+#
+# Free-provisioning friendly by construction:
+#   * no entitlements file, no capabilities, no push, no App Groups, no iCloud
+#   * automatic signing, DEVELOPMENT_TEAM left empty (Xcode fills it from your Apple ID)
+#   * single app target — one build installs on both pilot phones (kart chosen in-app)
+name: ARKartPilot
+options:
+  bundleIdPrefix: com.arkart
+  createIntermediateGroups: true
+  deploymentTarget:
+    iOS: "16.0"
+  groupSortPosition: top
+
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+    SWIFT_STRICT_CONCURRENCY: minimal
+    IPHONEOS_DEPLOYMENT_TARGET: "16.0"
+    ALWAYS_SEARCH_USER_PATHS: NO
+    CLANG_ENABLE_MODULES: YES
+    ENABLE_BITCODE: NO
+
+# A SHARED scheme, so `xcodebuild -scheme ARKartPilot` works on a fresh
+# checkout (without this XcodeGen emits none and only Xcode's per-user
+# autocreated scheme exists).
+schemes:
+  ARKartPilot:
+    build:
+      targets:
+        ARKartPilot: all
+    run:
+      config: Debug
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release
+
+targets:
+  ARKartPilot:
+    type: application
+    platform: iOS
+    sources:
+      - path: Sources
+    settings:
+      base:
+        PRODUCT_NAME: ARKartPilot
+        PRODUCT_BUNDLE_IDENTIFIER: com.arkart.ARKartPilot
+        MARKETING_VERSION: "1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        TARGETED_DEVICE_FAMILY: "1,2"
+        CODE_SIGN_STYLE: Automatic
+        # Intentionally empty: Xcode's "Automatically manage signing" + a personal
+        # (free) Apple ID team fills this in. Do NOT hardcode a team here.
+        DEVELOPMENT_TEAM: ""
+        CODE_SIGN_ENTITLEMENTS: ""
+        SUPPORTS_MACCATALYST: NO
+        SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: NO
+      configs:
+        Debug:
+          SWIFT_ACTIVE_COMPILATION_CONDITIONS: DEBUG
+    info:
+      path: Support/Info.plist
+      properties:
+        CFBundleDisplayName: AR Kart
+        CFBundleShortVersionString: "1.0"
+        CFBundleVersion: "1"
+        UILaunchScreen: {}
+        UIRequiresFullScreen: true
+        UIStatusBarHidden: true
+        UIViewControllerBasedStatusBarAppearance: false
+        UIUserInterfaceStyle: Dark
+        # Landscape only — this is an FPV racing cockpit.
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        # The kart MJPEG stream and the SpacetimeDB server are plain HTTP on the
+        # race LAN, so App Transport Security has to stand down. This needs no
+        # entitlement and no paid account.
+        NSAppTransportSecurity:
+          NSAllowsArbitraryLoads: true
+          NSAllowsLocalNetworking: true
+        NSLocalNetworkUsageDescription: >-
+          AR Kart Pilot talks to your kart's camera and the race server over the
+          local Wi-Fi network.

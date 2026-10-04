@@ -1,0 +1,60 @@
+# AR Kart kart-side firmware — ESP32-S3-CAM (N16R8: 16 MB flash, 8 MB octal PSRAM)
+# These are applied on a fresh `idf.py set-target esp32s3`; menuconfig can still override them.
+
+# ---- Flash: 16 MB, QIO ----------------------------------------------------------------
+CONFIG_ESPTOOLPY_FLASHSIZE_16MB=y
+CONFIG_ESPTOOLPY_FLASHMODE_QIO=y
+CONFIG_ESPTOOLPY_FLASHFREQ_80M=y
+
+# ---- Partitions: custom 3 MB factory app ----------------------------------------------
+CONFIG_PARTITION_TABLE_CUSTOM=y
+CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions.csv"
+
+# ---- PSRAM: octal, 80 MHz. MANDATORY above QVGA — without it JPEG compression is
+#      unstable and VGA frame buffers do not fit. -----------------------------------------
+CONFIG_SPIRAM=y
+CONFIG_SPIRAM_MODE_OCT=y
+CONFIG_SPIRAM_SPEED_80M=y
+CONFIG_SPIRAM_USE_MALLOC=y
+CONFIG_SPIRAM_TRY_ALLOCATE_WIFI_LWIP=y
+
+# ---- CPU + scheduler ------------------------------------------------------------------
+CONFIG_ESP_DEFAULT_CPU_FREQ_MHZ_240=y
+CONFIG_FREERTOS_HZ=1000
+
+# ---- Brownout: motor inrush on a 3xAA pack is the #1 predicted failure. Keep the detector
+#      on, but at the lowest trip level so a transient dip does not reset mid-race. -------
+CONFIG_ESP_BROWNOUT_DET=y
+CONFIG_ESP_BROWNOUT_DET_LVL_SEL_7=y
+
+# ---- Task watchdog: the MJPEG handler legitimately hogs its core-0 worker while a client
+#      is attached. Do not let the idle-task watchdog panic the kart for it. --------------
+CONFIG_ESP_TASK_WDT_CHECK_IDLE_TASK_CPU0=n
+CONFIG_ESP_TASK_WDT_TIMEOUT_S=10
+
+# ---- HTTP server: the MJPEG stream needs a roomier worker than the default --------------
+CONFIG_HTTPD_MAX_REQ_HDR_LEN=1024
+CONFIG_HTTPD_MAX_URI_LEN=512
+
+# ---- lwip: a couple of extra sockets so the UDP listener never loses to the stream ------
+CONFIG_LWIP_MAX_SOCKETS=10
+
+# ---- esp32-camera ----------------------------------------------------------------------
+# The board carries an OV3660. Leave the other sensor drivers out to save flash.
+CONFIG_OV3660_SUPPORT=y
+CONFIG_OV2640_SUPPORT=y
+CONFIG_OV5640_SUPPORT=n
+CONFIG_OV7725_SUPPORT=n
+CONFIG_OV7670_SUPPORT=n
+CONFIG_NT99141_SUPPORT=n
+CONFIG_GC2145_SUPPORT=n
+CONFIG_GC032A_SUPPORT=n
+CONFIG_GC0308_SUPPORT=n
+CONFIG_BF3005_SUPPORT=n
+CONFIG_BF20A6_SUPPORT=n
+CONFIG_SC101IOT_SUPPORT=n
+CONFIG_SC030IOT_SUPPORT=n
+CONFIG_SC031GS_SUPPORT=n
+
+# ---- Compiler --------------------------------------------------------------------------
+CONFIG_COMPILER_OPTIMIZATION_PERF=y

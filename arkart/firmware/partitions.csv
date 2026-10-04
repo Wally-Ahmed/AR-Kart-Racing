@@ -1,0 +1,6 @@
+# AR Kart — 16 MB flash (N16R8). One big factory app, no OTA: a hackathon kart is flashed
+# over USB-C, and 3 MB leaves plenty of room for WiFi + camera + HTTP server.
+# Name,     Type, SubType,  Offset,   Size,  Flags
+nvs,        data, nvs,      0x9000,   0x6000,
+phy_init,   data, phy,      0xf000,   0x1000,
+factory,    app,  factory,  0x10000,  3M,

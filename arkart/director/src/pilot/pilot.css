@@ -1,0 +1,609 @@
+/**
+ * Phone pilot styling. Deliberately NOT sharing `src/styles.css`: the director is a 1080p wall
+ * display with a mouse, this is a 390 px thumb-driven cockpit, and the two have no layout in common.
+ *
+ * System fonts only, on purpose — the venue AP (`arkart`) has no uplink, so a webfont request would
+ * be a guaranteed failed fetch on every pilot's phone.
+ */
+
+:root {
+  --bg: #07070b;
+  --ink: #f2f2f7;
+  --dim: #8b8b9c;
+  --line: rgba(255, 255, 255, 0.14);
+  --panel: rgba(12, 12, 18, 0.62);
+  --accent: #3ddbd9;
+  --armed: #4ade80;
+  --warn: #ffd23f;
+  --danger: #ff4d4d;
+  --thr: #ffd23f;
+  --str: #3ddbd9;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+  /* No long-press menus, no text selection, no double-tap zoom, no rubber-band scroll. */
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  touch-action: none;
+}
+
+#pilot {
+  position: fixed;
+  inset: 0;
+}
+
+/* ------------------------------------------------------------------ claim */
+
+.claim {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: max(16px, env(safe-area-inset-top)) 16px 16px;
+  overflow-y: auto;
+  background: var(--bg);
+  touch-action: pan-y;
+}
+
+.claim h1 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.claim p {
+  margin: 0;
+  color: var(--dim);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.claim-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.claim-kart {
+  flex: 1 1 160px;
+  min-height: 92px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #11111a;
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.claim-kart:active {
+  border-color: var(--accent);
+  background: #171723;
+}
+
+.claim-kart b {
+  display: block;
+  font-size: 22px;
+  letter-spacing: 0.06em;
+}
+
+.claim-kart span {
+  display: block;
+  margin-top: 4px;
+  color: var(--dim);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.claim-kart.taken span {
+  color: var(--warn);
+}
+
+/* -------------------------------------------------------------- cockpit */
+
+.stage {
+  position: absolute;
+  inset: 0;
+}
+
+.fpv {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #000;
+}
+
+.fpv img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Hidden (not removed) while offline so the retry can just reset .src. */
+  display: block;
+}
+
+.fpv img.off {
+  display: none;
+}
+
+/**
+ * The no-video notice sits ABOVE the pads (z 4 vs. z 2) so it is readable, and is
+ * `pointer-events: none` all the way through so it can never swallow a thumb — a pilot with no
+ * video must still be able to drive. Its RETRY lives in the topbar, clear of the pads entirely.
+ * It is a sibling of `.fpv`, not a child: `.fpv` has its own z-index, so a child could not have
+ * escaped that stacking context to get over the pads.
+ */
+.fpv-fallback {
+  position: absolute;
+  z-index: 4;
+  inset: 62px 0 0 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px;
+  text-align: center;
+  pointer-events: none;
+}
+
+.stage.novideo .fpv-fallback {
+  display: flex;
+}
+
+.fpv-fallback strong {
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--warn);
+}
+
+.fpv-fallback code {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--dim);
+  word-break: break-all;
+}
+
+.fpv-fallback em {
+  max-width: 34ch;
+  font-size: 11px;
+  font-style: normal;
+  color: var(--dim);
+}
+
+/* In the topbar, next to ARM — never over a pad. Hidden while video is healthy. */
+.btn-retry {
+  min-width: 56px;
+  min-height: 46px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #16161f;
+  color: var(--warn);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.1;
+}
+
+.btn-retry.hide {
+  display: none;
+}
+
+/* ------------------------------------------------------------------ hud */
+
+.topbar {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 62px;
+  padding: 0 max(10px, env(safe-area-inset-right)) 0 max(10px, env(safe-area-inset-left));
+  background: linear-gradient(180deg, rgba(5, 5, 9, 0.9), rgba(5, 5, 9, 0.35));
+}
+
+.hud {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.chip {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 5px 9px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--panel);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.chip b {
+  color: var(--accent);
+}
+
+.chip.kart b {
+  color: var(--ink);
+}
+
+.chip.state[data-state='running'] b {
+  color: var(--armed);
+}
+
+.chip.state[data-state='countdown'] b {
+  color: var(--warn);
+}
+
+.chip.armed {
+  border-color: var(--armed);
+  color: var(--armed);
+}
+
+.chip.disarmed {
+  color: var(--dim);
+}
+
+.chip.err {
+  border-color: var(--danger);
+  color: var(--danger);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 34vw;
+}
+
+.chip.hide {
+  display: none;
+}
+
+.tele {
+  display: flex;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.tele span {
+  color: var(--dim);
+}
+
+.tele b {
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.tele .v-thr {
+  color: var(--thr);
+}
+
+.tele .v-str {
+  color: var(--str);
+}
+
+.buttons {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 8px;
+}
+
+.btn {
+  min-width: 86px;
+  min-height: 46px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #15151f;
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+}
+
+.btn-arm {
+  border-color: var(--armed);
+  background: rgba(74, 222, 128, 0.16);
+  color: var(--armed);
+}
+
+.btn-arm[data-armed='1'] {
+  border-color: var(--warn);
+  background: rgba(255, 210, 63, 0.18);
+  color: var(--warn);
+}
+
+/* ABORT is HOLD-to-fire: the fill is the only feedback a thumb gets, so it is not decoration. */
+.btn-abort {
+  position: relative;
+  overflow: hidden;
+  border-color: var(--danger);
+  background: rgba(255, 77, 77, 0.14);
+  color: #ffb3b3;
+}
+
+.btn-abort .fill {
+  position: absolute;
+  inset: 0 100% 0 0;
+  background: var(--danger);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.btn-abort .lbl {
+  position: relative;
+}
+
+/* ----------------------------------------------------------------- pads */
+
+.pads {
+  position: absolute;
+  z-index: 2;
+  top: 62px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  gap: 6px;
+  padding: 6px max(6px, env(safe-area-inset-right)) max(6px, env(safe-area-inset-bottom))
+    max(6px, env(safe-area-inset-left));
+}
+
+.pad {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(10, 10, 16, 0.42);
+  backdrop-filter: blur(2px);
+  touch-action: none;
+  overflow: hidden;
+}
+
+.pad .cap {
+  position: absolute;
+  top: 7px;
+  left: 10px;
+  color: var(--dim);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+}
+
+.pad.live {
+  border-color: var(--accent);
+  background: rgba(61, 219, 217, 0.1);
+}
+
+.col-steer {
+  flex: 1 1 50%;
+}
+
+.col-right {
+  display: flex;
+  flex: 1 1 50%;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pad-throttle {
+  flex: 1 1 62%;
+}
+
+.pad-brake {
+  flex: 1 1 38%;
+  display: grid;
+  place-items: center;
+  border-color: rgba(255, 77, 77, 0.45);
+  background: rgba(255, 77, 77, 0.1);
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  color: #ffb3b3;
+}
+
+.pad-brake.live {
+  border-color: var(--danger);
+  background: rgba(255, 77, 77, 0.34);
+  color: #fff;
+}
+
+/* Steering: a centre tick plus a thumb marker that tracks the live value. */
+.steer-centre {
+  position: absolute;
+  top: 24%;
+  bottom: 24%;
+  left: 50%;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--line);
+}
+
+/* Positioned in PERCENT so the marker needs no element measuring at 25 Hz. */
+.steer-knob {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 56px;
+  height: 56px;
+  transform: translate(-50%, -50%);
+  border: 2px solid var(--str);
+  border-radius: 50%;
+  background: rgba(61, 219, 217, 0.18);
+  transition: left 60ms linear;
+}
+
+/* Bottom-LEFT, out from under the centre banner. */
+.steer-readout {
+  position: absolute;
+  left: 10px;
+  bottom: 8px;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: var(--str);
+}
+
+/* Throttle: a bar that fills from the bottom. */
+.thr-bar {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 0%;
+  background: linear-gradient(0deg, rgba(255, 210, 63, 0.55), rgba(255, 210, 63, 0.18));
+  transition: height 60ms linear;
+}
+
+.thr-readout {
+  position: absolute;
+  right: 10px;
+  bottom: 8px;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: var(--thr);
+}
+
+.thr-hint {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--dim);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  pointer-events: none;
+}
+
+.pad-throttle.live .thr-hint {
+  display: none;
+}
+
+/* ------------------------------------------------------------- banners */
+
+.banner {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  bottom: max(8px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  max-width: 92vw;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(8, 8, 12, 0.88);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-align: center;
+  pointer-events: none;
+}
+
+.banner.hide {
+  display: none;
+}
+
+.banner.warn {
+  border-color: var(--warn);
+  color: var(--warn);
+}
+
+.banner.err {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+/* Portrait is usable (every control still reachable) but landscape is the cockpit. */
+.rotate {
+  display: none;
+}
+
+@media (orientation: portrait) {
+  .rotate {
+    position: absolute;
+    z-index: 6;
+    top: 68px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    padding: 6px 12px;
+    border: 1px solid var(--warn);
+    border-radius: 999px;
+    background: rgba(8, 8, 12, 0.9);
+    color: var(--warn);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+  }
+
+  .topbar {
+    height: 56px;
+  }
+
+  .pads {
+    top: 56px;
+  }
+
+  .steer-knob {
+    width: 44px;
+    height: 44px;
+  }
+
+  .btn {
+    min-width: 66px;
+    padding: 0 8px;
+    font-size: 12px;
+  }
+
+  /* 390 px of topbar does not fit six chips. The race state and the live telemetry both still
+   * have a home (the banner, and the pads' own readouts), so they are the ones that go. */
+  .chip {
+    padding: 4px 7px;
+    font-size: 10px;
+  }
+
+  .chip.tele-chip,
+  .chip.state {
+    display: none;
+  }
+}

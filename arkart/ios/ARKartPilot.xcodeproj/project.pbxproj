@@ -1,0 +1,397 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		076894173E58904754AF5624 /* GamepadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A7B1076167635AAA548DE5 /* GamepadManager.swift */; };
+		0FFBB986925031DE60D3DE2F /* STDBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31517C550143C942F3CB582 /* STDBClient.swift */; };
+		1631A0693CB4F9D2456749FF /* ARKartPilotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E3B02695F22CAD99CB6067 /* ARKartPilotApp.swift */; };
+		352F2390ABDFF6929B338B2D /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAD813FCEDE3976A46F83D8 /* RootView.swift */; };
+		412BE81525DE66B2B3D9BD28 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE20FD1C379D7FAAD038E84 /* Theme.swift */; };
+		52FA21A6872CA573678826B1 /* ControlPads.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE06FCD2D08C9A3048C2E63A /* ControlPads.swift */; };
+		75CAC1C59104FDC104E31C30 /* HUDQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6096397DDEE967FBEA2515 /* HUDQuery.swift */; };
+		82D3F0E6DCF8A11EF66F0E6A /* PilotEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2EA85CE72A1460CD93CD40 /* PilotEngine.swift */; };
+		A1DD8EFF76D181968397905A /* FPVPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28E98E888E7225CE34E3CEC /* FPVPage.swift */; };
+		A515051865D2B4D535B9FFC7 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471D858A2DE701D39569B235 /* Item.swift */; };
+		B91762CAE6C0106A85FA7C6A /* SettingsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6061DE1E213CE8FBD9A91362 /* SettingsSheet.swift */; };
+		BA160B20A631D20A06317744 /* FPVWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D52001D0BA26BA29B00AF4 /* FPVWebView.swift */; };
+		E22CE94FDBDC676E5F4EA155 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F524D5272C1D684942D8107D /* AppSettings.swift */; };
+		E2C9E3F070F57BAD6B8C11C2 /* HUDOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB518700897EE3745F83A0 /* HUDOverlay.swift */; };
+		E5D09A3D3D3E42238AC9B71F /* InkOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965B153A80EEC84BD0A56846 /* InkOverlay.swift */; };
+		EECCBDACE2007B82796DC3C9 /* HUDState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE01C7956FEFA60707A9E6C /* HUDState.swift */; };
+		F652F106AF4562982AF959AE /* SATS.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4120DD69A11501894C98F5 /* SATS.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0227D056D4CD12A6403D6EB2 /* ARKartPilot.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ARKartPilot.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		07A7B1076167635AAA548DE5 /* GamepadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamepadManager.swift; sourceTree = "<group>"; };
+		0A2EA85CE72A1460CD93CD40 /* PilotEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilotEngine.swift; sourceTree = "<group>"; };
+		19D52001D0BA26BA29B00AF4 /* FPVWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPVWebView.swift; sourceTree = "<group>"; };
+		2FE01C7956FEFA60707A9E6C /* HUDState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDState.swift; sourceTree = "<group>"; };
+		471D858A2DE701D39569B235 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		6061DE1E213CE8FBD9A91362 /* SettingsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSheet.swift; sourceTree = "<group>"; };
+		8AAD813FCEDE3976A46F83D8 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		8F6096397DDEE967FBEA2515 /* HUDQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDQuery.swift; sourceTree = "<group>"; };
+		965B153A80EEC84BD0A56846 /* InkOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InkOverlay.swift; sourceTree = "<group>"; };
+		B0CB518700897EE3745F83A0 /* HUDOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDOverlay.swift; sourceTree = "<group>"; };
+		B28E98E888E7225CE34E3CEC /* FPVPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPVPage.swift; sourceTree = "<group>"; };
+		BE06FCD2D08C9A3048C2E63A /* ControlPads.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlPads.swift; sourceTree = "<group>"; };
+		CC4120DD69A11501894C98F5 /* SATS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SATS.swift; sourceTree = "<group>"; };
+		CDE20FD1C379D7FAAD038E84 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		D31517C550143C942F3CB582 /* STDBClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STDBClient.swift; sourceTree = "<group>"; };
+		F524D5272C1D684942D8107D /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		F6E3B02695F22CAD99CB6067 /* ARKartPilotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARKartPilotApp.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		088B060EE1B29504BCA9C4BD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BE06FCD2D08C9A3048C2E63A /* ControlPads.swift */,
+				19D52001D0BA26BA29B00AF4 /* FPVWebView.swift */,
+				B0CB518700897EE3745F83A0 /* HUDOverlay.swift */,
+				965B153A80EEC84BD0A56846 /* InkOverlay.swift */,
+				8AAD813FCEDE3976A46F83D8 /* RootView.swift */,
+				6061DE1E213CE8FBD9A91362 /* SettingsSheet.swift */,
+				CDE20FD1C379D7FAAD038E84 /* Theme.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		96797F67ECF0DEC2207BE65A = {
+			isa = PBXGroup;
+			children = (
+				DC815D696D7A185F6F1F3199 /* Sources */,
+				A3D6CF31070FA6DAABC3FDE9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A3D6CF31070FA6DAABC3FDE9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0227D056D4CD12A6403D6EB2 /* ARKartPilot.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AE307F50E630BDB73754C07F /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				F524D5272C1D684942D8107D /* AppSettings.swift */,
+				B28E98E888E7225CE34E3CEC /* FPVPage.swift */,
+				8F6096397DDEE967FBEA2515 /* HUDQuery.swift */,
+				2FE01C7956FEFA60707A9E6C /* HUDState.swift */,
+				471D858A2DE701D39569B235 /* Item.swift */,
+				0A2EA85CE72A1460CD93CD40 /* PilotEngine.swift */,
+				CC4120DD69A11501894C98F5 /* SATS.swift */,
+				D31517C550143C942F3CB582 /* STDBClient.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		BD99E3D504332AE9651FC44B /* Input */ = {
+			isa = PBXGroup;
+			children = (
+				07A7B1076167635AAA548DE5 /* GamepadManager.swift */,
+			);
+			path = Input;
+			sourceTree = "<group>";
+		};
+		DC815D696D7A185F6F1F3199 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				AE307F50E630BDB73754C07F /* Core */,
+				BD99E3D504332AE9651FC44B /* Input */,
+				088B060EE1B29504BCA9C4BD /* Views */,
+				F6E3B02695F22CAD99CB6067 /* ARKartPilotApp.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0932EE2FD29D6FFFE77D0E36 /* ARKartPilot */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3B9008F08499A49BC1092BB9 /* Build configuration list for PBXNativeTarget "ARKartPilot" */;
+			buildPhases = (
+				60AFCB1DCB56B3DCB894CD79 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ARKartPilot;
+			packageProductDependencies = (
+			);
+			productName = ARKartPilot;
+			productReference = 0227D056D4CD12A6403D6EB2 /* ARKartPilot.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		72FD61F44EFE7C1DE1E5DDC1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					0932EE2FD29D6FFFE77D0E36 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 07108B510F8227A6635E24AA /* Build configuration list for PBXProject "ARKartPilot" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 96797F67ECF0DEC2207BE65A;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = A3D6CF31070FA6DAABC3FDE9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0932EE2FD29D6FFFE77D0E36 /* ARKartPilot */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		60AFCB1DCB56B3DCB894CD79 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1631A0693CB4F9D2456749FF /* ARKartPilotApp.swift in Sources */,
+				E22CE94FDBDC676E5F4EA155 /* AppSettings.swift in Sources */,
+				52FA21A6872CA573678826B1 /* ControlPads.swift in Sources */,
+				A1DD8EFF76D181968397905A /* FPVPage.swift in Sources */,
+				BA160B20A631D20A06317744 /* FPVWebView.swift in Sources */,
+				076894173E58904754AF5624 /* GamepadManager.swift in Sources */,
+				E2C9E3F070F57BAD6B8C11C2 /* HUDOverlay.swift in Sources */,
+				75CAC1C59104FDC104E31C30 /* HUDQuery.swift in Sources */,
+				EECCBDACE2007B82796DC3C9 /* HUDState.swift in Sources */,
+				E5D09A3D3D3E42238AC9B71F /* InkOverlay.swift in Sources */,
+				A515051865D2B4D535B9FFC7 /* Item.swift in Sources */,
+				82D3F0E6DCF8A11EF66F0E6A /* PilotEngine.swift in Sources */,
+				352F2390ABDFF6929B338B2D /* RootView.swift in Sources */,
+				F652F106AF4562982AF959AE /* SATS.swift in Sources */,
+				0FFBB986925031DE60D3DE2F /* STDBClient.swift in Sources */,
+				B91762CAE6C0106A85FA7C6A /* SettingsSheet.swift in Sources */,
+				412BE81525DE66B2B3D9BD28 /* Theme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		80B5164E33BF5449786EA1B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = minimal;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		9678BCD6965108C21AE6537D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = minimal;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		B2B51F54D4DE373BDF944C1B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = Support/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = NO;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.arkart.ARKartPilot;
+				PRODUCT_NAME = ARKartPilot;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		E12F4CC2A6F83BF9C247C636 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = Support/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = NO;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.arkart.ARKartPilot;
+				PRODUCT_NAME = ARKartPilot;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		07108B510F8227A6635E24AA /* Build configuration list for PBXProject "ARKartPilot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9678BCD6965108C21AE6537D /* Debug */,
+				80B5164E33BF5449786EA1B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		3B9008F08499A49BC1092BB9 /* Build configuration list for PBXNativeTarget "ARKartPilot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E12F4CC2A6F83BF9C247C636 /* Debug */,
+				B2B51F54D4DE373BDF944C1B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 72FD61F44EFE7C1DE1E5DDC1 /* Project object */;
+}

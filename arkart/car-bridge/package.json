@@ -1,0 +1,24 @@
+{
+  "name": "arkart-car-bridge",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AR Kart car bridge - SpacetimeDB -> UDP enforcer for the karts",
+  "type": "module",
+  "engines": { "node": ">=22.18" },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "node --test test/*.test.ts",
+    "start": "node src/index.ts",
+    "sim": "BRIDGE_SOURCE=sim node src/index.ts",
+    "sql": "BRIDGE_SOURCE=sql node src/index.ts",
+    "listen": "node src/listen.ts",
+    "check": "npm run typecheck && npm test"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.1",
+    "typescript": "^5.9.3"
+  },
+  "optionalDependencies": {
+    "@clockworklabs/spacetimedb-sdk": "1.3.3"
+  }
+}

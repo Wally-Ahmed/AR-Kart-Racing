@@ -1,0 +1,10 @@
+# Plan M — PWM through kit transistors (drive.c).
+# Overlay fragment: apply ON TOP OF sdkconfig.defaults, never instead of it.
+#
+#   idf.py -B build.planm \
+#          -D SDKCONFIG=sdkconfig.planm.out \
+#          -D SDKCONFIG_DEFAULTS="sdkconfig.defaults;sdkconfig.planm" \
+#          build
+#
+# This is also the plain `idf.py build` behaviour — PWM is the Kconfig default.
+CONFIG_ARKART_DRIVE_BACKEND_PWM=y

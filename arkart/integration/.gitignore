@@ -1,0 +1,5 @@
+# Build output and run evidence — all regenerable.
+node_modules/
+module_bindings/
+fixtures/*.avi
+.run/

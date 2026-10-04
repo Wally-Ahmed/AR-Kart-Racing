@@ -1,0 +1,127 @@
+menu "AR Kart Firmware"
+
+    choice ARKART_DRIVE_BACKEND
+        prompt "Drive backend"
+        default ARKART_DRIVE_BACKEND_PWM
+        help
+            How this kart's motors are driven. One firmware tree, one backend per build —
+            the two karts can be built differently because the teardown found two different
+            receiver boards in the same Tornado chassis.
+
+        config ARKART_DRIVE_BACKEND_PWM
+            bool "Plan M — PWM through kit transistors (drive.c)"
+            help
+                The stock receiver board is discarded. GPIO47 PWMs a low-side 2N2222 for the
+                rear drive motor and GPIO41/42 drive the front steer coil through an H-bridge
+                built from kit parts, all on LEDC timer 1. Requires the soldering in the
+                build sheet and the five bench probes in motor_map.h.
+
+        config ARKART_DRIVE_BACKEND_RXINJECT
+            bool "Plan RX — radio-socket injection into the stock board (rx_inject.c)"
+            help
+                The stock single-chip receiver-decoder board (SA1607RX 330, SOP-16, an
+                RX-2B-family five-function clone) stays in the car on its own batteries and
+                keeps doing all the motor driving. Its plug-in radio module is removed and the
+                ESP32 impersonates it, bit-banging the demodulated pulse-train into the
+                decoder's data input (pin 14) with the RMT peripheral.
+                Two wires total: ARKART_PIN_RX_DATA -> pin 14 / the socket's DATA pad,
+                ESP32 GND -> the board's V- hole.
+                No transistors; GPIO41/42 and LEDC timer 1 are unused.
+                The pulse-count ladder is the RX-2B reference table, not a measured one —
+                run the serial `sweep` before trusting it.
+    endchoice
+
+    config ARKART_RXINJECT_CONSOLE
+        bool "Plan RX: serial calibration console"
+        depends on ARKART_DRIVE_BACKEND_RXINJECT
+        default y
+        help
+            A line parser on the console UART with sniff / sweep / code / set / fwd / steer /
+            stop. This is how the pulse-count ladder gets calibrated against the actual clone
+            in the car: `sniff` releases the pin to a high-impedance input and reads the real
+            protocol off the wire while the car's own 27 MHz remote is pressed; `sweep`
+            transmits candidate counts when no remote is available. Leave it on — it costs a
+            few KB and a low-priority task, and it is the only way to retune the protocol
+            without a reflash. Turn it off only for a race build where nothing may be typed
+            at the kart.
+
+    config ARKART_WIFI_SSID
+        string "WiFi SSID"
+        default "arkart"
+        help
+            SSID the kart joins. Use your own router / travel AP on a clean channel —
+            venue WiFi at a hackathon is the single most reliable way to lose a demo.
+
+    config ARKART_WIFI_PASSWORD
+        string "WiFi password"
+        default "arkartarkart"
+        help
+            WPA2 passphrase. Leave empty for an open AP.
+
+    config ARKART_KART_ID
+        int "Kart ID"
+        range 0 255
+        default 1
+        help
+            This kart's id. The UDP control packet carries a kart_id in byte 2 and packets
+            addressed to a different kart are dropped, so both karts can share a broadcast
+            or the same subnet safely. Flash kart 1 and kart 2 with different values here —
+            it is the ONLY per-kart difference in the whole firmware.
+
+    config ARKART_UDP_PORT
+        int "UDP control port"
+        range 1 65535
+        default 7777
+        help
+            Port the car bridge sends control packets to. The bridge hard-codes 7777;
+            change both or neither.
+
+    config ARKART_STDB_HOST
+        string "SpacetimeDB host (IR tag hit reporting)"
+        default "192.168.4.1"
+        help
+            Host or IP running `spacetime start`. The IR tag layer POSTs
+            report_hit(shooter, victim) to http://<host>:<port>/v1/database/<db>/call/report_hit
+            whenever this kart is tagged — the same HTTP reducer convention the vision bridge
+            uses for report_gate. This is the ONLY thing in the firmware that talks to
+            SpacetimeDB; drive control still comes from the car bridge over UDP.
+            Put the laptop's address on the kart's own network here.
+
+    config ARKART_STDB_PORT
+        int "SpacetimeDB HTTP port"
+        range 1 65535
+        default 3000
+        help
+            `spacetime start` listens on 3000 by default.
+
+    config ARKART_STDB_DB
+        string "SpacetimeDB database name"
+        default "arkart"
+        help
+            The published module's name, i.e. the `arkart` in
+            `spacetime publish arkart`.
+
+    config ARKART_USE_STATIC_IP
+        bool "Use a static IP instead of DHCP"
+        default n
+        help
+            The car bridge and the vision bridge both need to know each kart's address.
+            A static IP removes the "which address did it get this time" step at the cost
+            of having to pick addresses that fit your AP's subnet.
+
+    config ARKART_STATIC_IP
+        string "Static IP address"
+        depends on ARKART_USE_STATIC_IP
+        default "192.168.4.11"
+
+    config ARKART_STATIC_GW
+        string "Static gateway"
+        depends on ARKART_USE_STATIC_IP
+        default "192.168.4.1"
+
+    config ARKART_STATIC_NETMASK
+        string "Static netmask"
+        depends on ARKART_USE_STATIC_IP
+        default "255.255.255.0"
+
+endmenu
